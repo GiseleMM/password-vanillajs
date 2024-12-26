@@ -57,6 +57,11 @@ const mayusculasInput = formulario.mayusculas;
 const copyBoton = document.getElementById("copy");
 const refreshBoton = document.getElementById("refresh");
 
+//badge
+const badgeMayuscula = mayusculasInput.nextElementSibling.nextElementSibling;
+const badgeNumero = numerosInput.nextElementSibling.nextElementSibling;
+const badgeSimbolo = simbolosInput.nextElementSibling.nextElementSibling;
+
 //estilo
 const CLASES_FORTALEZAS = {
   fuerte: ["bg-success", "bg-opacity-50"],
@@ -100,16 +105,63 @@ refreshBoton.addEventListener("click", (event) => {
 formulario.addEventListener("input", (evento) => {
   console.log(evento.target.value);
   const input = evento.target;
-  if (input) refresh();
+badgeMayuscula.classList.add("d-none");
+badgeSimbolo.classList.add("d-none");
+badgeNumero.classList.add("d-none");
+
+
+  if (!checkTotalValoresInputs(getValoresDeInputs())) {
+    console.log("No es valido");
+    console.log(input.id);
+    switch (input.id) {
+      case "mayusculas":
+        console.log(mayusculasInput.nextElementSibling.nextElementSibling);
+
+        badgeMayuscula.innerHTML = "No puede superar longitud";
+        mayusculasInput.value = 0;
+        badgeMayuscula.classList.remove("d-none");
+        resultadoInput.value="";
+
+        break;
+      case "numeros":
+        console.log(numerosInput.nextElementSibling.nextElementSibling);
+
+        badgeNumero.innerHTML = "No puede superar longitud";
+        numerosInput.value = 0;
+
+        badgeNumero.classList.remove("d-none");
+        resultadoInput.value="";
+
+        break;
+      case "simbolos":
+        console.log(simbolosInput.nextElementSibling.nextElementSibling);
+
+        badgeSimbolo.innerHTML = "No puede superar longitud";
+        simbolosInput.value = 0;
+        badgeSimbolo.classList.remove("d-none");
+        resultadoInput.value="";
+
+        break;
+      default:
+        break;
+    }
+  } else {
+    if (input) refresh();
+  }
 });
 
-function refresh() {
-  console.log("refresh");
-
+function getValoresDeInputs() {
   let longitud = longitudInput ? Number(longitudInput.value) : 0;
   let numeros = numerosInput ? Number(numerosInput.value) : 0;
   let mayusculas = mayusculasInput ? Number(mayusculasInput.value) : 0;
   let simbolos = simbolosInput ? Number(simbolosInput.value) : 0;
+  return { longitud, mayusculas, numeros, simbolos };
+}
+
+function refresh() {
+  console.log("refresh");
+
+  const { longitud, mayusculas, numeros, simbolos } = getValoresDeInputs();
 
   console.log(longitud, numeros, mayusculas, simbolos);
   if (longitud == 0) {
@@ -124,7 +176,9 @@ function refresh() {
     if (longitud > 0) {
       habilitar(); // habilito demas input
 
-      if (checkTotalValoresInput({ longitud, mayusculas, numeros, simbolos })) {
+      if (
+        checkTotalValoresInputs({ longitud, mayusculas, numeros, simbolos })
+      ) {
         resultadoInput.value = "";
         let array = construirPassword({
           longitud,
@@ -133,13 +187,7 @@ function refresh() {
           simbolos,
         });
         addPassword(array.join(""));
-      } else {
-        showModal(
-          "❌​ Error ​👇​",
-          " Por favor, verifica que la longitud concuerde con las demas cantidad 👀"
-        );
-        reset();
-      }
+      } 
     }
   }
 }
@@ -155,7 +203,7 @@ function addPassword(pass) {
     addFortaleza(fortaleza);
   }
 }
-function checkTotalValoresInput({ longitud, mayusculas, numeros, simbolos }) {
+function checkTotalValoresInputs({ longitud, mayusculas, numeros, simbolos }) {
   return (
     longitud >= mayusculas &&
     longitud >= simbolos &&
@@ -195,7 +243,6 @@ function quitarStyleFortalezaPass() {
 }
 
 function estiloPorFortaleza(clasesAgregar, clasesQuitar) {
-
   //quito todos los estilos
   resultadoInput.classList.remove(...clasesQuitar);
 
@@ -281,21 +328,3 @@ function evaluarContraseña(password) {
   return "Fuerte";
 }
 
-// MODAL---------------------
-
-modal.addEventListener("click", (event) => {
-  closeModal();
-});
-function showModal(titulo, mensaje) {
-  tituloModal.innerHTML = titulo;
-  mensajeModal.innerHTML = mensaje;
-  modal.classList.remove("d-none");
-}
-function closeModal() {
-  clearModal();
-  modal.classList.add("d-none");
-}
-function clearModal() {
-  tituloModal.innerHTML = "";
-  mensajeModal.innerHTML = "";
-}
