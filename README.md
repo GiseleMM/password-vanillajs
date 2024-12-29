@@ -16,3 +16,7 @@ ___Conceptos clave:___
 ___Extras:___
 
 - Valida la fortaleza de la contraseña generada.
+
+___QR:___
+
+![framepass](https://github.com/user-attachments/assets/115e8ffa-61fb-49d2-ba5f-84b75af44d51)
