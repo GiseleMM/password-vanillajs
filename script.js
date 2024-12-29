@@ -48,6 +48,10 @@ const SIMBOLOS = [
   ")",
 ]; //16
 //!@#$%^&*(),.?":{}|<>
+const FORTALEZA_DEBIL="Débil";
+const FORTALEZA_MEDIA="Media";
+const FORTALEZA_FUERTE="Fuerte";
+
 const formulario = document.forms[0];
 const resultadoInput = document.forms[0].resultado;
 const longitudInput = formulario.longitud;
@@ -323,8 +327,11 @@ function evaluarContraseña(password) {
   if (/[a-z]/.test(password)) puntuacion++;
   if (/[0-9]/.test(password)) puntuacion++;
   if (/[!@#$%^&*(),.?":{}|<>]/.test(password)) puntuacion++;
-  if (puntuacion <= 2) return "Débil";
-  if (puntuacion <= 4) return "Media";
-  return "Fuerte";
+  if (puntuacion <= 2) return FORTALEZA_DEBIL;
+  if (puntuacion <= 4) return FORTALEZA_MEDIA;
+  return FORTALEZA_FUERTE;
 }
+
+const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
 

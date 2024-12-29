@@ -86,5 +86,8 @@
   .fortaleza-fuerte{
     border: 3px solid green;
 
-
+  }
+  body{
+    background-image: url("./assets/fondopass.png");
+    background-size: cover;
   }

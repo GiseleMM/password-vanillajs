@@ -16,21 +16,22 @@
       integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
       crossorigin="anonymous"
     ></script>
+    <link rel="stylesheet" href="style.css">
   </head>
 
   <body>
     <main
-      class="container w-50 d-flex flex-column align-content-center justify-content-center min-vh-100"
+      class="container w-50 d-flex flex-column align-content-center justify-content-center min-vh-100 shadow"
     >
       <header class="row justify-content-center text-center">
-        <h2>Generate password</h2>
+        <h2 class="text-body-secondary my-5">Generate password</h2>
       </header>
 
       <form action="">
-        <div class="form-floating mb-3">
+        <div class="form-floating mb-3 mx-5">
           <input
             type="number"
-            class="form-control"
+            class="form-control form-control-sm border-0"
             id="longitud"
             min="0"
             max="30"
@@ -38,10 +39,10 @@
           />
           <label for="longitud">Length</label>
         </div>
-        <div class="form-floating mb-3">
+        <div class="form-floating mb-3 mx-5">
           <input
             type="number"
-            class="form-control"
+            class="form-control form-control-sm border-0"
             id="numeros"
             min="0"
             max="30"
@@ -54,10 +55,10 @@
           </div>
         </div>
 
-        <div class="form-floating mb-3">
+        <div class="form-floating mb-3 mx-5">
           <input
             type="number"
-            class="form-control"
+            class="form-control form-control-sm border-0"
             id="mayusculas"
             min="0"
             max="30"
@@ -70,10 +71,10 @@
           </div>
         </div>
 
-        <div class="form-floating mb-3">
+        <div class="form-floating mb-3 mx-5">
           <input
             type="number"
-            class="form-control"
+            class="form-control form-control-sm border-0"
             id="simbolos"
             min="0"
             max="30"
@@ -86,12 +87,12 @@
           </div>
         </div>
 
-        <div class="row align-items-stretch">
+        <div class="row align-items-stretch mx-5">
           <div class="col-9">
             <div class="form-floating mb-3">
               <input
                 type="text"
-                class="form-control"
+                class="form-control border-0"
                 id="resultado"
                 readonly
                 aria-describedby="resultHelp"
@@ -101,20 +102,20 @@
 
             <div id="resultHelp" class="form-text">
               <span style="color: red" class="fst-italic"
-                >Fortaleza debil
+                >Weak 
               </span>
               <span style="color: orange" class="fst-italic"
-                >Fortaleza media
+                >Medium 
               </span>
               <span style="color: green" class="fst-italic"
-                >Fortaleza fuerte
+                >Strong 
               </span>
             </div>
           </div>
 
           <div class="col">
             <!-- Copy -->
-            <button type="button" class="btn btn-outline-secondary" id="copy">
+            <button type="button" class="btn btn-outline-secondary" id="copy"  data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Copy password">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
@@ -131,7 +132,7 @@
             </button>
 
             <!-- REFRESH -->
-            <button type="button" class="btn btn-outline-success" id="refresh">
+            <button type="button" class="btn btn-outline-success" id="refresh"  data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="New password">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
